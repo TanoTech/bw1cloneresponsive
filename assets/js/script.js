@@ -115,10 +115,26 @@ const showSection = function (sectionId) {
 
 showSection('welcome')
 
-const proceedButton = document.getElementById('proceed')
-proceedButton.addEventListener('click', function () {
-    showSection('benchmark')
-    showQuestions()
+const proceedButton = document.getElementById('proceed');
+proceedButton.addEventListener('mouseover', function () {
+    const checkBox = document.querySelector('#showBenchmark')
+    const toolTip = document.querySelector('.tooltip')
+     
+    if (!checkBox.checked) {
+        toolTip.style.display = 'block'
+        proceedButton.style.cursor = 'not-allowed'
+    } else {
+        proceedButton.style.cursor = 'pointer'
+        proceedButton.addEventListener('click', function (){
+            showSection('benchmark')
+            showQuestions()
+        })
+    }
+
+    if (checkBox.checked) {
+        toolTip.style.display = 'none'
+        proceedButton.style.backgroundColor = '#00FFFF'
+    }
 })
 
 const answersContainer = document.getElementById('answersContainer')
@@ -141,6 +157,14 @@ answersContainer.addEventListener('change', function () {
         }
     }
 })
+
+const rateUsButton = document.getElementById('rateUs')
+rateUsButton.addEventListener('click', function() {
+    showSection('feedback')
+})
+
+const submitBtn = document.getElementById('submitRating')
+submitBtn.addEventListener('click')
 
 const showQuestions = function () {
 
@@ -207,4 +231,6 @@ const showResult = function () {
         subResultBenchmark.textContent = "You didn't pass the exam."
     }
 }
+
+
 
