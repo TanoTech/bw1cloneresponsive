@@ -27,7 +27,7 @@
 
             <form id="goToQuiz">
                 <label>
-                    <input type="checkbox" name="mostraQuiz" id="mostraQuiz">
+                    <input type="checkbox" name="showBenchmark" id="showBenchmark">
                 </label>
                 <p class="tooltip checkbox">You must accept to proceed</p>
                 <button type="button" id="proceed">PROCEED</button>
@@ -47,14 +47,11 @@
                 </div>
             </div>
 
-            <h2>Question</h2>
-            <form id="answers">
-               <button class="answer">answer</button>
-               <button class="answer">answer</button>
-               <button class="answer">answer</button>
-               <button class="answer ">answer</button>
-            </form>
-            <p>questions index</p>
+           <div id="questionsContainer">
+            <h3 id="currentQuestion">current question</h3>
+            <div id="answersContainer"></div>
+            <p id="questionCounter"></p>
+           </div>
         </section>
 
         <section id="result">
