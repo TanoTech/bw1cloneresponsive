@@ -99,6 +99,7 @@ const questions = [
 ];
 
 let questionIndex = 0
+let correctAnswer = []
 
 const showSection = function (sectionId) {
     let allSection = document.querySelectorAll('main > section')
@@ -120,49 +121,61 @@ proceedButton.addEventListener('click', function () {
     showQuestions()
 })
 
-const answersContainer = document.getElementById('answersContainer');
+const answersContainer = document.getElementById('answersContainer')
 answersContainer.addEventListener('change', function () {
-    if (questionIndex < questions.length) {
-        showQuestions()
-    } else {
-        showSection('result')
+    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+    if (selectedAnswer) {
+        const currentQuestion = questions[questionIndex - 1]
+        const userAnswer = selectedAnswer.value
+
+        if (userAnswer === currentQuestion.correct_answer) {
+            correctAnswer.push(currentQuestion)
+        }
+
+        if (questionIndex < questions.length) {
+            showQuestions()
+        } else {
+            showSection('result')
+            showResult()
+        }
     }
 })
 
 const showQuestions = function () {
-   
+
     if (questionIndex < questions.length) {
         const currentQuestion = questions[questionIndex]
         const answers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]
         const randomAnswer = answers.sort(() => Math.random() - 0.5)
-    
+
         const questionContainer = document.getElementById('currentQuestion')
         const answersContainer = document.getElementById('answersContainer')
-    
+
         answersContainer.innerHTML = ''
         questionContainer.innerHTML = currentQuestion.question
-    
+
         for (let i = 0; i < randomAnswer.length; i++) {
             const answer = randomAnswer[i]
-    
+
             const answerInput = document.createElement('input')
             answerInput.type = 'radio'
             answerInput.name = 'answer'
             answerInput.value = answer
             answerInput.id = 'answer' + [i]
             answerInput.style.display = 'none'
-    
+
             const answerLabel = document.createElement('label')
             answerInput.setAttribute('for', 'answer' + [i])
             answerLabel.innerHTML = answer;
-    
+
             answerLabel.appendChild(answerInput)
             answersContainer.appendChild(answerLabel)
         }
 
         const questionCounter = document.querySelector('#questionCounter')
-        questionCounter.innerHTML = `${questionIndex + 1} <span class:'pinkText> /${questions.length}</span>`
-    
+        questionCounter.innerHTML = `${questionIndex + 1} <span class:'pinkText'> /${questions.length}</span>`
+
         questionIndex++
     } else {
         showSection('result')
@@ -170,6 +183,28 @@ const showQuestions = function () {
 }
 
 const showResult = function () {
+    const totalQuestions = questions.length
+    const correctQuestionsNum = correctAnswer.length
+    const correctAnswerIndex = document.getElementById('correctAnswersIndex')
+    correctAnswerIndex.textContent = `${correctQuestionsNum}/${totalQuestions}`
+    const wrongAnswerIndex = document.getElementById('wrongAnswersIndex')
+    wrongAnswerIndex.textContent = `${totalQuestions - correctQuestionsNum}/${totalQuestions}`
+    const correctAnswersPercentage = document.getElementById('correctAnswersPercentage')
+    correctAnswersPercentage.textContent = `${correctQuestionsNum * 10}%`
+    const wrongAnswersPercentage = document.getElementById('wrongAnswersPercentage')
+    wrongAnswersPercentage.textContent = `${(totalQuestions - correctQuestionsNum) * 10}%`
 
+    const resultBenchmark = document.getElementById('resultBenchmark')
+    const subResultBenchmark = document.getElementById('subResultBenchmark')
+    const emailResultBenchmark = document.getElementById('emailResultBenchmark')
+
+    if (correctQuestionsNum > 0.6 * totalQuestions){
+        resultBenchmark.textContent = 'Congratulations!'
+        subResultBenchmark.textContent = 'You passed the exam.'
+        emailResultBenchmark.textContent = "We'll send you the certificate in few minutes. Check your email (including promotion/spam folder"
+    } else {
+        resultBenchmark.textContent = "Failed!"
+        subResultBenchmark.textContent = "You didn't pass the exam."
+    }
 }
-   
+
