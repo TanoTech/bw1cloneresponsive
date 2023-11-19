@@ -115,27 +115,37 @@ const showSection = function (sectionId) {
 
 showSection('welcome')
 
+const checkBox = document.querySelector('#showBenchmark')
+const toolTip = document.querySelector('.tooltip')
 const proceedButton = document.getElementById('proceed');
+
 proceedButton.addEventListener('mouseover', function () {
-    const checkBox = document.querySelector('#showBenchmark')
-    const toolTip = document.querySelector('.tooltip')
-     
     if (!checkBox.checked) {
         toolTip.style.display = 'block'
         proceedButton.style.cursor = 'not-allowed'
     } else {
         proceedButton.style.cursor = 'pointer'
+        
+    }
+})
+
+ checkBox.addEventListener('click', function (event) {
+    if (checkBox.checked) {
+        toolTip.style.display = 'none'
+        proceedButton.style.backgroundColor = '#00FFFF'
         proceedButton.addEventListener('click', function (){
             showSection('benchmark')
             showQuestions()
         })
-    }
+    } else {
+        proceedButton.style.cursor = 'not-allowed'
+        proceedButton.style.backgroundColor = 'grey'
+        proceedButton.addEventListener('click', function (){
+            toolTip.style.display = 'block'
 
-    if (checkBox.checked) {
-        toolTip.style.display = 'none'
-        proceedButton.style.backgroundColor = '#00FFFF'
+        })
     }
-})
+ })
 
 const answersContainer = document.getElementById('answersContainer')
 answersContainer.addEventListener('change', function () {
@@ -164,7 +174,9 @@ rateUsButton.addEventListener('click', function() {
 })
 
 const submitBtn = document.getElementById('submitRating')
-submitBtn.addEventListener('click')
+submitBtn.addEventListener('click', function (){
+
+})
 
 const showQuestions = function () {
 
@@ -232,5 +244,7 @@ const showResult = function () {
     }
 }
 
+
+let ratingIndex = []
 
 
