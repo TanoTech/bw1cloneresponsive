@@ -10,35 +10,49 @@
     <title>Welcome</title>
 </head>
 <body>
+    <header>
+        <img src="assets/img/epicode_logo.png" alt="epicode logo">
+    </header>
  <main>
         <section id="welcome">
 
-            <h1>Welcome to <span id="bold">your exam</span></h1>
-            <p id="rosa">Instructions</p>
+            <h1>Welcome to <span class="boldText">your exam</span></h1>
+            <p class="pinkText">Instructions</p>
             <p>We don't expect most engineers to know the answer to all of these questions, so don't worry if you're unsure of a few o them</p>
             <ul>
-                <li>Each question is <span id="bold">timed</span> and can only be <span id="bold">answered once</span>.</li>
-                <li>Changing browser tab or opening other windows will <span id="bold">invalidate the question</span></li>
-                <li>This exam will take approx. <span id="bold">0-5 minutes</span></li>
+                <li>Each question is <span class="boldText">timed</span> and can only be <span class="boldText">answered once</span>.</li>
+                <li>Changing browser tab or opening other windows will <span class="boldText">invalidate the question</span></li>
+                <li>This exam will take approx. <span class="boldText">0-5 minutes</span></li>
             </ul>
 
             <form id="goToQuiz">
                 <label>
                     <input type="checkbox" name="mostraQuiz" id="mostraQuiz">
-                    <p id="tooltip">You must accept to proceed</p>
                 </label>
+                <p class="tooltip checkbox">You must accept to proceed</p>
                 <button type="button" id="proceed">PROCEED</button>
-                <p id="tooltip">You need to check the terms</p>
+                <p class="tooltip button">You need to check the terms</p>
             </form>
         </section>
 
         <section id="benchmark">
+
+            <div id="timer">
+                <div id="timerCircle">
+                    <div id="rotateTimerCircle">
+                        <p class="timerText">SECONDS</p>
+                        <p id="timerNumber">00</p>
+                        <p class="timerText">REMAINING</p>
+                    </div>
+                </div>
+            </div>
+
             <h2>Question</h2>
             <form id="answers">
-               <button>answer</button>
-               <button>answer</button>
-               <button>answer</button>
-               <button>answer</button>
+               <button class="answer">answer</button>
+               <button class="answer">answer</button>
+               <button class="answer">answer</button>
+               <button class="answer ">answer</button>
             </form>
             <p>questions index</p>
         </section>
@@ -59,7 +73,7 @@
                     <div id="circle">
                         <div id="rotateCircle">
                             <p id="resultBenchmark">!</p>
-                            <p id="subResultBenchmark"></p>
+                            <p id="subResultBenchmark" class="blueText">!</p>
                             <p id="emailResultBenchmark"></p>
                         </div>
                     </div>
@@ -81,16 +95,16 @@
             <p>From 0 to 10, how likely are you to reccomend EPICODE to a friend or a colleague?</p>
             
             <div id="starBox">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
-                <img src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
+                <img class="star" src="assets/img/star.svg" alt="feedback star">
             </div>
 
             <p>Leave us an open feedback about yout experience so far</p>
@@ -98,8 +112,11 @@
             <input type="text" name="feedbackComment" id="feedbackComment" maxlength="100">
 
             <button id="moreInfo">MORE INFO</button>
-            <p id="tooltip">Leave a rating star to continue</p>
+            <p class="tooltip buttonFeedback">Leave a rating star to continue</p>
         </section>
  </main>
+
+ <script src="assets/js/script.js"></script>
+
 </body>
 </html>
