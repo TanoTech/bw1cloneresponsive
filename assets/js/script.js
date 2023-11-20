@@ -125,7 +125,6 @@ proceedButton.addEventListener('mouseover', function () {
         proceedButton.style.cursor = 'not-allowed'
     } else {
         proceedButton.style.cursor = 'pointer'
-
     }
 })
 
@@ -180,6 +179,7 @@ submitBtn.addEventListener('click', function () {
 
 const showQuestions = function () {
     timer()
+
     if (questionIndex < questions.length) {
         const currentQuestion = questions[questionIndex]
         const answers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]
@@ -188,7 +188,7 @@ const showQuestions = function () {
         const questionContainer = document.getElementById('currentQuestion')
         const answersContainer = document.getElementById('answersContainer')
 
-        answersContainer.innerHTML = ''
+        answersContainer.innerHTML = '';
         questionContainer.innerHTML = currentQuestion.question
 
         for (let i = 0; i < randomAnswer.length; i++) {
@@ -203,16 +203,20 @@ const showQuestions = function () {
 
             const answerLabel = document.createElement('label')
             answerInput.setAttribute('for', 'answer' + [i])
-            answerLabel.innerHTML = answer;
+            answerLabel.innerHTML = answer
 
             answerLabel.appendChild(answerInput)
             answersContainer.appendChild(answerLabel)
         }
 
-        const questionCounter = document.querySelector('#questionCounter')
-        questionCounter.innerHTML = `QUESTIONS ${questionIndex + 1} <span class:'pinkText'> /${questions.length}</span>`
+        const questionCounter = document.querySelector('#questionCounter');
+        questionCounter.innerHTML = `QUESTIONS ${questionIndex + 1}<span class="pinkText">/${questions.length}</span>`
 
         questionIndex++
+        
+        setTimeout(() => {
+            showQuestions()
+        }, 3000) 
     } else {
         showSection('result')
     }
@@ -236,6 +240,7 @@ const showResult = function () {
 
     const rotateCircle = document.getElementById('circle')
 
+    
     let startValue = 0
     let finalValue = (totalQuestions - correctQuestionsNum) * 10
     let speedProgress = 20
@@ -252,7 +257,7 @@ const showResult = function () {
 
     }, speedProgress)
 
-    if (correctQuestionsNum > 0.6 * totalQuestions) {
+    if (correctQuestionsNum >= 0.6 * totalQuestions) {
         resultBenchmark.textContent = 'Congratulations!'
         subResultBenchmark.textContent = 'You passed the exam.'
         emailResultBenchmark.textContent = "We'll send you the certificate in few minutes. Check your email (including promotion/spam folder"
@@ -262,9 +267,9 @@ const showResult = function () {
     }
 }
 
+let timerInterval
 
 const timer = function () {
-
     const progressBar = document.getElementById('timerCircle')
     const valueContainer = document.getElementById('timerNumber')
 
@@ -281,16 +286,18 @@ const timer = function () {
 
     const startTime = Date.now()
 
-    const progress = setInterval(() => {
-        const elapsedTime = Date.now() - startTime
+    clearInterval(timerInterval)
+
+    timerInterval = setInterval(() => {
+        const elapsedTime = Date.now() - startTime;
         progressValue = Math.max(0, 30 - Math.floor(elapsedTime / 1000))
 
         updateProgressBar()
 
         if (progressValue === progressEndValue) {
-            clearInterval(progress)
+            clearInterval(timerInterval)
         }
-    }, interval);
+    }, interval)
 
     function updateProgressBar() {
         const formattedValue = progressValue < 10 ? `0${progressValue}` : `${progressValue}`
@@ -300,11 +307,4 @@ const timer = function () {
         #75FBFD ${currentStep - step}deg)`
         currentStep += step
     }
-};
-
-const hideTimer = function () {
-    const pickTimer = document.querySelector('.timerCircle')
-    pickTimer.style.display = 'none'
 }
-
-
