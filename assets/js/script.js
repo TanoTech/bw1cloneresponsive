@@ -180,6 +180,8 @@ submitBtn.addEventListener('click', function (){
 
 const showQuestions = function () {
 
+    timer()
+
     if (questionIndex < questions.length) {
         const currentQuestion = questions[questionIndex]
         const answers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]
@@ -245,6 +247,48 @@ const showResult = function () {
 }
 
 
-let ratingIndex = []
+const timer = function () {
+
+    const progressBar = document.getElementById('timerCircle')
+    const valueContainer = document.getElementById('timerNumber')
+  
+    let progressValue = 30
+    const progressEndValue = 0
+    const duration = 30000
+    const interval = 100
+  
+    const steps = duration / interval
+    const step = 360 / steps
+    let currentStep = 0
+  
+    updateProgressBar()
+  
+    const startTime = Date.now()
+  
+    const progress = setInterval(() => {
+      const elapsedTime = Date.now() - startTime
+      progressValue = Math.max(0, 30 - Math.floor(elapsedTime / 1000))
+  
+      updateProgressBar()
+  
+      if (progressValue === progressEndValue) {
+        clearInterval(progress)
+      }
+    }, interval);
+  
+    function updateProgressBar() {
+      const formattedValue = progressValue < 10 ? `0${progressValue}` : `${progressValue}`
+      valueContainer.textContent = formattedValue
+      progressBar.style.background = `conic-gradient(
+        transparent ${currentStep}deg,
+        #75FBFD ${currentStep - step}deg)`
+      currentStep += step
+    }
+  };
+  
+  const nascondiTimer = function () {
+    const prendiTimer = document.querySelector('.rotateTimerCircle')
+    prendiTimer.style.display = 'none'
+  }
 
 
