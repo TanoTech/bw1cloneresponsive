@@ -125,27 +125,27 @@ proceedButton.addEventListener('mouseover', function () {
         proceedButton.style.cursor = 'not-allowed'
     } else {
         proceedButton.style.cursor = 'pointer'
-        
+
     }
 })
 
- checkBox.addEventListener('click', function (event) {
+checkBox.addEventListener('click', function (event) {
     if (checkBox.checked) {
         toolTip.style.display = 'none'
         proceedButton.style.backgroundColor = '#00FFFF'
-        proceedButton.addEventListener('click', function (){
+        proceedButton.addEventListener('click', function () {
             showSection('benchmark')
             showQuestions()
         })
     } else {
         proceedButton.style.cursor = 'not-allowed'
         proceedButton.style.backgroundColor = 'grey'
-        proceedButton.addEventListener('click', function (){
+        proceedButton.addEventListener('click', function () {
             toolTip.style.display = 'block'
 
         })
     }
- })
+})
 
 const answersContainer = document.getElementById('answersContainer')
 answersContainer.addEventListener('change', function () {
@@ -169,19 +169,17 @@ answersContainer.addEventListener('change', function () {
 })
 
 const rateUsButton = document.getElementById('rateUs')
-rateUsButton.addEventListener('click', function() {
+rateUsButton.addEventListener('click', function () {
     showSection('feedback')
 })
 
 const submitBtn = document.getElementById('submitRating')
-submitBtn.addEventListener('click', function (){
+submitBtn.addEventListener('click', function () {
 
 })
 
 const showQuestions = function () {
-
     timer()
-
     if (questionIndex < questions.length) {
         const currentQuestion = questions[questionIndex]
         const answers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]
@@ -236,7 +234,25 @@ const showResult = function () {
     const subResultBenchmark = document.getElementById('subResultBenchmark')
     const emailResultBenchmark = document.getElementById('emailResultBenchmark')
 
-    if (correctQuestionsNum > 0.6 * totalQuestions){
+    const rotateCircle = document.getElementById('circle')
+
+    let startValue = 0
+    let finalValue = (totalQuestions - correctQuestionsNum) * 10
+    let speedProgress = 20
+
+    let progress = setInterval(() => {
+        startValue++
+        rotateCircle.style.background = `conic-gradient(
+      #B22B8A ${startValue * 3.6}deg,
+      #75FBFD ${startValue * 3.6}deg)`
+
+        if (startValue === finalValue) {
+            clearInterval(progress)
+        }
+
+    }, speedProgress)
+
+    if (correctQuestionsNum > 0.6 * totalQuestions) {
         resultBenchmark.textContent = 'Congratulations!'
         subResultBenchmark.textContent = 'You passed the exam.'
         emailResultBenchmark.textContent = "We'll send you the certificate in few minutes. Check your email (including promotion/spam folder"
@@ -251,44 +267,44 @@ const timer = function () {
 
     const progressBar = document.getElementById('timerCircle')
     const valueContainer = document.getElementById('timerNumber')
-  
+
     let progressValue = 30
     const progressEndValue = 0
     const duration = 30000
     const interval = 100
-  
+
     const steps = duration / interval
     const step = 360 / steps
     let currentStep = 0
-  
+
     updateProgressBar()
-  
+
     const startTime = Date.now()
-  
+
     const progress = setInterval(() => {
-      const elapsedTime = Date.now() - startTime
-      progressValue = Math.max(0, 30 - Math.floor(elapsedTime / 1000))
-  
-      updateProgressBar()
-  
-      if (progressValue === progressEndValue) {
-        clearInterval(progress)
-      }
+        const elapsedTime = Date.now() - startTime
+        progressValue = Math.max(0, 30 - Math.floor(elapsedTime / 1000))
+
+        updateProgressBar()
+
+        if (progressValue === progressEndValue) {
+            clearInterval(progress)
+        }
     }, interval);
-  
+
     function updateProgressBar() {
-      const formattedValue = progressValue < 10 ? `0${progressValue}` : `${progressValue}`
-      valueContainer.textContent = formattedValue
-      progressBar.style.background = `conic-gradient(
+        const formattedValue = progressValue < 10 ? `0${progressValue}` : `${progressValue}`
+        valueContainer.textContent = formattedValue
+        progressBar.style.background = `conic-gradient(
         transparent ${currentStep}deg,
         #75FBFD ${currentStep - step}deg)`
-      currentStep += step
+        currentStep += step
     }
-  };
-  
-  const nascondiTimer = function () {
-    const prendiTimer = document.querySelector('.rotateTimerCircle')
-    prendiTimer.style.display = 'none'
-  }
+};
+
+const hideTimer = function () {
+    const pickTimer = document.querySelector('.timerCircle')
+    pickTimer.style.display = 'none'
+}
 
 
