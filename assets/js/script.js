@@ -210,7 +210,7 @@ const showQuestions = function () {
         }
 
         const questionCounter = document.querySelector('#questionCounter')
-        questionCounter.innerHTML = `${questionIndex + 1} <span class:'pinkText'> /${questions.length}</span>`
+        questionCounter.innerHTML = `QUESTIONS ${questionIndex + 1} <span class:'pinkText'> /${questions.length}</span>`
 
         questionIndex++
     } else {
@@ -222,9 +222,9 @@ const showResult = function () {
     const totalQuestions = questions.length
     const correctQuestionsNum = correctAnswer.length
     const correctAnswerIndex = document.getElementById('correctAnswersIndex')
-    correctAnswerIndex.textContent = `${correctQuestionsNum}/${totalQuestions}`
+    correctAnswerIndex.textContent = `${correctQuestionsNum}/${totalQuestions} questions`
     const wrongAnswerIndex = document.getElementById('wrongAnswersIndex')
-    wrongAnswerIndex.textContent = `${totalQuestions - correctQuestionsNum}/${totalQuestions}`
+    wrongAnswerIndex.textContent = `${totalQuestions - correctQuestionsNum}/${totalQuestions} questions`
     const correctAnswersPercentage = document.getElementById('correctAnswersPercentage')
     correctAnswersPercentage.textContent = `${correctQuestionsNum * 10}%`
     const wrongAnswersPercentage = document.getElementById('wrongAnswersPercentage')
