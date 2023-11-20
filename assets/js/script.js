@@ -240,7 +240,8 @@ const showResult = function () {
 
     const rotateCircle = document.getElementById('circle')
 
-    
+
+
     let startValue = 0
     let finalValue = (totalQuestions - correctQuestionsNum) * 10
     let speedProgress = 20
