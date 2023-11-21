@@ -123,6 +123,7 @@ proceedButton.addEventListener('mouseover', function () {
     if (!checkBox.checked) {
         toolTip.style.display = 'block'
         proceedButton.style.cursor = 'not-allowed'
+        proceedButton.style.backgroundColor = 'grey'
     } else {
         proceedButton.style.cursor = 'pointer'
     }
@@ -216,7 +217,7 @@ const showQuestions = function () {
         
         setTimeout(() => {
             showQuestions()
-        }, 3000) 
+        }, 30000) 
     } else {
         showSection('result')
     }

@@ -84,7 +84,6 @@ ul li {
 }
 
 /*Timer*/
-
 #timer {
     display: flex;
     position: absolute;
@@ -125,7 +124,6 @@ ul li {
 }
 
 /* Cakegraph */
-
 #cakeGraph {
     display: flex;
     background-color: transparent;
@@ -169,7 +167,6 @@ ul li {
 }
 
 /* Section Result*/
-
 #result {
     text-align: center;
     line-height: 0.8rem;
@@ -192,7 +189,6 @@ ul li {
 }
 
 /* section Feedback */
-
 #feedback {
     text-align: center;
 }
@@ -201,6 +197,33 @@ ul li {
     width: 1.3rem;
     margin-bottom: 1rem;
 }
+
+/*Button*/
+button {
+    padding: 0.6rem 2.3rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+#proceed,
+#rateUs:hover,
+#submitRating {
+    background-color: grey;
+}
+
+#proceed:hover,
+#submitRating:hover{
+    -webkit-box-shadow: 1px 2px 15px 8px #00ffff; 
+    box-shadow: 1px 2px 15px 8px #00ffff;
+    background-color: #00FFFF;
+}
+
+#rateUs {
+    border: 1px solid rgb(244, 239, 239);
+    color: rgb(244, 237, 237);
+    background-color: transparent;
+}
+
 
 @media screen and (min-width:400px) {
     #timer {
